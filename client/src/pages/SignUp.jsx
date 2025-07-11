@@ -1,6 +1,7 @@
 import { set } from "mongoose";
 import { useNavigate, Link } from "react-router-dom";
 import React, { useState } from 'react'
+import OAuth from "../components/OAuth.jsx";
 
 
 const SignUp = () => {
@@ -61,6 +62,7 @@ const SignUp = () => {
         <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-80'>
           {loading ? "Cargando..." : "Registrarse"}
         </button>
+        <OAuth />
       </form>
 
       <div className='flex gap-2 mt-5'>
