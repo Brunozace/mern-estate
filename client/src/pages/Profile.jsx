@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const Profile = () => {
-
+  
   const { currentUser } = useSelector((state) => state.user);
+  const {formData, setFormData} = useState({});
 
   return (
     <div className="p-3 max-w-lg mx-auto">
