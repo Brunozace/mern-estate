@@ -5,6 +5,8 @@ import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listing.route.js";
+import path from "path";
+
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ mongoose.connect(process.env.MONGO).then(() => {
     console.log("Error: " + err);
 });
 
+const __dirname = path.resolve();
 
 
 const app = express();
@@ -27,6 +30,18 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(clientDistPath));
+
+  app.get('/{*splat}', (req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
+
+
+
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
